@@ -12,7 +12,9 @@ type RouterGroup struct {
 func InitRouter() *gin.Engine {
 	gin.SetMode(global.Config.System.Env)
 	r := gin.Default()
+	//路由分组
 	apiRouterGroup := r.Group("api")
+	//路由分成
 	//系统配置api
 	routerGroupApp := RouterGroup{apiRouterGroup}
 	routerGroupApp.SettingsRouter()
