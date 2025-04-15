@@ -31,27 +31,26 @@ site_Info:
   slogan_en: up and up
   web: ""
   github_url: ""
+qq:
+  app_id: xx
+  key: xxxx
+  redirect: xx
+qi_niu:
+  access_key: ""
+  secret_key: ""
+  bucket: ""
+  cdn: ""
+  zone: ""
+  size: 0
+email:
+  host: ""
+  port: 0
+  user: ""
+  password: ""
+  defaultFromEmail: ""
+  use_ssL: false
+  use_tls: false
 jwt:
   secret: xxx
   expires: 48
   issuer: xx
-email:
-  host:
-  port:
-  user:
-  password:
-  defaultFromEmail:
-  use_ssL:
-  use_tls:
-qq:
-  app_id :
-  key:
-  redirect:
-qi_niu:
-  access_key:
-  secret_key:
-  bucket:
-  cdn:
-  zone:
-  size:
-
