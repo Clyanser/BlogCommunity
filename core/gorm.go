@@ -21,8 +21,13 @@ func InitGorm() *gorm.DB {
 	} else {
 		mysqlLogger = logger.Default.LogMode(logger.Error)
 	}
+	global.MySqlLog = logger.Default.LogMode(logger.Info)
+
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
-		Logger: mysqlLogger,
+		Logger:                 mysqlLogger,
+		NowFunc:                nil,
+		DisableAutomaticPing:   true,
+		SkipDefaultTransaction: true,
 	})
 	if err != nil {
 		global.Log.Fatalf("mysql连接失败", err)

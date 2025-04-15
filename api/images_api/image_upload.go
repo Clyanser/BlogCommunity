@@ -2,10 +2,12 @@ package images_api
 
 import (
 	"GoBlog/global"
+	"GoBlog/models"
 	"GoBlog/models/res"
 	"GoBlog/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"io"
 	"path"
 	"strings"
 )
@@ -65,16 +67,40 @@ func (ImagesAPI) ImageUploadView(c *gin.Context) {
 			})
 			continue
 		}
+
+		fileObj, err := file.Open()
+		if err != nil {
+			global.Log.Error(err)
+		}
+		byteData, err := io.ReadAll(fileObj)
+		imageHash := utils.Md5V(byteData)
+		//去数据库里面查，这个文件是否存在-根据hashValue
+		var bannerModel models.BannerModel
+		err = global.DB.Take(&bannerModel, "hash = ?", imageHash).Error
+		if err == nil {
+			reslist = append(reslist, FileUploadResponse{
+				Filename:  bannerModel.Path,
+				IsSuccess: false,
+				Message:   "图片重复！",
+			})
+			continue
+		}
+		err = c.SaveUploadedFile(file, filePath)
+		if err != nil {
+			global.Log.Error(err)
+			continue
+		}
 		reslist = append(reslist, FileUploadResponse{
 			Filename:  filePath,
 			IsSuccess: true,
 			Message:   "上传成功！",
 		})
-		err := c.SaveUploadedFile(file, filePath)
-		if err != nil {
-			global.Log.Error(err)
-			continue
-		}
+		//图片入库
+		global.DB.Create(&models.BannerModel{
+			Path: filePath,
+			Hash: imageHash,
+			Name: fileName,
+		})
 	}
 	res.OkWithData(reslist, c)
 	//fileheader, err := c.FormFile("image")
