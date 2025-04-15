@@ -3,9 +3,18 @@ package images_api
 import (
 	"GoBlog/global"
 	"GoBlog/models/res"
+	"GoBlog/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"path"
+	"strings"
+)
+
+// 图片上传的白名单
+var (
+	WitheImagesList = []string{
+		"jpg", "jpeg", "png", "gif",
+	}
 )
 
 // 构造一个图片上传的响应
@@ -32,6 +41,19 @@ func (ImagesAPI) ImageUploadView(c *gin.Context) {
 	//判断路径是否存在，不存在就创建
 
 	for _, file := range fileList {
+		//判断上传的图片后缀是否合法
+		fileName := file.Filename
+		nameList := strings.Split(fileName, ".")
+		suffix := strings.ToLower(nameList[len(nameList)-1])
+		if !utils.IsInList(suffix, WitheImagesList) {
+			reslist = append(reslist, FileUploadResponse{
+				Filename:  file.Filename,
+				IsSuccess: false,
+				Message:   "非法文件格式",
+			})
+			continue
+		}
+
 		filePath := path.Join(global.Config.Upload.Path, file.Filename)
 		//判断大小
 		size := float64(file.Size) / float64(1024*1024)
