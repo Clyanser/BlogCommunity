@@ -5,13 +5,15 @@ import (
 	"GoBlog/global"
 	"fmt"
 	"gopkg.in/yaml.v2"
+	"io/fs"
 	"io/ioutil"
 	"log"
 )
 
+const ConfigFile = "settings.yaml"
+
 // 读取yaml文件的配置
 func InitConf() {
-	const ConfigFile = "settings.yaml"
 	c := &config.Config{}
 	yamlConfig, err := ioutil.ReadFile(ConfigFile)
 	if err != nil {
@@ -26,4 +28,17 @@ func InitConf() {
 	//需要一个全局变量用于保存配置文件，存放在golbal 目录下
 	global.Config = c
 
+}
+
+func SetYaml() error {
+	byteData, err := yaml.Marshal(global.Config)
+	if err != nil {
+		return err
+	}
+	err = ioutil.WriteFile(ConfigFile, byteData, fs.ModePerm)
+	if err != nil {
+		return err
+	}
+	global.Log.Info("配置文件修改成功")
+	return nil
 }
