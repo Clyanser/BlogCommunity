@@ -17,7 +17,7 @@ system:
   port: 9090
   env: release
 upload:
-  size: 2
+  size: 20
   path: uploads/file
 site_Info:
   created_at: "2025-04-14"
@@ -39,13 +39,13 @@ qq:
   key: xxxx
   redirect: xx
 qi_niu:
-  enable: false
-  access_key: ""
-  secret_key: ""
-  bucket: ""
-  cdn: ""
-  zone: ""
-  size: 0
+  enable: true
+  access_key: qwwHtwpSIZrya1TLEhFQcNpY25If70-9qwNQS45C
+  secret_key: X-HELtON3WMobFiPgZ6zv-lpc6guKexkxQMcU4qd
+  bucket: amoytudou
+  cdn: hn-bkt-clouddn-com-idvcz9d.www.qiniudns.com
+  zone: z2
+  size: 20
 email:
   host: ""
   port: 0
