@@ -3,7 +3,9 @@ package images_api
 import (
 	"GoBlog/global"
 	"GoBlog/models"
+	"GoBlog/models/ctype"
 	"GoBlog/models/res"
+	"GoBlog/plugins/qiniu"
 	"GoBlog/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -74,6 +76,7 @@ func (ImagesAPI) ImageUploadView(c *gin.Context) {
 		}
 		byteData, err := io.ReadAll(fileObj)
 		imageHash := utils.Md5V(byteData)
+
 		//去数据库里面查，这个文件是否存在-根据hashValue
 		var bannerModel models.BannerModel
 		err = global.DB.Take(&bannerModel, "hash = ?", imageHash).Error
@@ -85,6 +88,26 @@ func (ImagesAPI) ImageUploadView(c *gin.Context) {
 			})
 			continue
 		}
+		//判断是否使用七牛云
+		if global.Config.QiNiu.Enable {
+			if filePath, err = qiniu.UploadImage(byteData, fileName, "goBlog"); err != nil {
+				global.Log.Error(err)
+				continue
+			}
+			reslist = append(reslist, FileUploadResponse{
+				Filename:  filePath,
+				IsSuccess: true,
+				Message:   "七牛云上传成功！！",
+			})
+			global.DB.Create(&models.BannerModel{
+				Path:      filePath,
+				Hash:      imageHash,
+				Name:      fileName,
+				ImageType: ctype.QiNiu,
+			})
+			continue
+		}
+
 		err = c.SaveUploadedFile(file, filePath)
 		if err != nil {
 			global.Log.Error(err)
@@ -97,9 +120,10 @@ func (ImagesAPI) ImageUploadView(c *gin.Context) {
 		})
 		//图片入库
 		global.DB.Create(&models.BannerModel{
-			Path: filePath,
-			Hash: imageHash,
-			Name: fileName,
+			Path:      filePath,
+			Hash:      imageHash,
+			Name:      fileName,
+			ImageType: ctype.Local,
 		})
 	}
 	res.OkWithData(reslist, c)
