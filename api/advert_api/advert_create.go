@@ -5,17 +5,23 @@ import (
 	"GoBlog/models"
 	"GoBlog/models/res"
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 )
 
 type AdvertReq struct {
-	gorm.Model `structs:"-"`
-	Title      string `json:"title" binding:"required" msg:"请输入标题" structs:"title"`        //显示的标题
-	Href       string `json:"href" binding:"required,url" msg:"非法的跳转链接" structs:"href"`    //跳转链接
-	Images     string `json:"images" binding:"required,url" msg:"图片地址非法" structs:"images"` //图片
-	IsShow     bool   `json:"is_show" msg:"请选择标题是否展示" structs:"is_show"`                   //是否展示
+	Title  string `json:"title" binding:"required" msg:"请输入标题" structs:"title"`        //显示的标题
+	Href   string `json:"href" binding:"required,url" msg:"非法的跳转链接" structs:"href"`    //跳转链接
+	Images string `json:"images" binding:"required,url" msg:"图片地址非法" structs:"images"` //图片
+	IsShow bool   `json:"is_show" msg:"请选择标题是否展示" structs:"is_show"`                   //是否展示
 }
 
+// AdvertCreat 添加广告
+// @Summary 创建广告
+// @Description 创建广告
+// @Tags 广告管理
+// @Param data body AdvertReq  true "表示多个参数"
+// @Router /api/adverts [post]
+// produce json
+// @Success 200 {object} res.Response{}
 func (AdvertApi) AdvertCreat(c *gin.Context) {
 	var cr AdvertReq
 	//参数校验

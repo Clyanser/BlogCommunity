@@ -8,6 +8,14 @@ import (
 	"strings"
 )
 
+// AdvertList 广告列表
+// @Summary 广告列表
+// @Description 广告列表
+// @Tags 广告管理
+// @Param data body models.PageInfo  true "表示多个参数"
+// @Router /api/adverts [get]
+// produce json
+// @Success 200 {object} res.Response{}
 func (AdvertApi) AdvertList(c *gin.Context) {
 	var cr models.PageInfo
 	if err := c.ShouldBind(&cr); err != nil {
@@ -26,4 +34,5 @@ func (AdvertApi) AdvertList(c *gin.Context) {
 		Debug:    true,
 	})
 	res.OkWithList(list, count, c)
+
 }
