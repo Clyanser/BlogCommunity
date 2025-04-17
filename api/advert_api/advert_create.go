@@ -10,9 +10,9 @@ import (
 
 type AdvertCreateReq struct {
 	gorm.Model
-	Title  string `json:"title" binding:"required" msg:"请输入标题"`           //显示的标题
-	Href   string `json:"href" binding:"required,url" msg:"非法的跳转链接"`    //跳转链接
-	Images string `json:"images" binding:"required,url" msg:"图片地址非法"`    //图片
+	Title  string `json:"title" binding:"required" msg:"请输入标题"`       //显示的标题
+	Href   string `json:"href" binding:"required,url" msg:"非法的跳转链接"`  //跳转链接
+	Images string `json:"images" binding:"required,url" msg:"图片地址非法"` //图片
 	IsShow bool   `json:"is_show" binding:"required" msg:"请选择标题是否展示"` //是否展示
 }
 
@@ -27,7 +27,7 @@ func (AdvertApi) AdvertCreat(c *gin.Context) {
 	//重复的判断
 	var advert models.AdvertModel
 	err = global.DB.Take(&advert, "title = ?", cr.Title).Error
-	if err != nil {
+	if err == nil {
 		res.FailWithMsg("该广告已存在", c)
 		return
 	}
