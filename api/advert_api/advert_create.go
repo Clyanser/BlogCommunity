@@ -8,16 +8,16 @@ import (
 	"gorm.io/gorm"
 )
 
-type AdvertCreateReq struct {
-	gorm.Model
-	Title  string `json:"title" binding:"required" msg:"请输入标题"`       //显示的标题
-	Href   string `json:"href" binding:"required,url" msg:"非法的跳转链接"`  //跳转链接
-	Images string `json:"images" binding:"required,url" msg:"图片地址非法"` //图片
-	IsShow bool   `json:"is_show" binding:"required" msg:"请选择标题是否展示"` //是否展示
+type AdvertReq struct {
+	gorm.Model `structs:"-"`
+	Title      string `json:"title" binding:"required" msg:"请输入标题" structs:"title"`         //显示的标题
+	Href       string `json:"href" binding:"required,url" msg:"非法的跳转链接" structs:"href"`   //跳转链接
+	Images     string `json:"images" binding:"required,url" msg:"图片地址非法" structs:"images"` //图片
+	IsShow     bool   `json:"is_show" msg:"请选择标题是否展示" structs:"is_show"`                //是否展示
 }
 
 func (AdvertApi) AdvertCreat(c *gin.Context) {
-	var cr AdvertCreateReq
+	var cr AdvertReq
 	//参数校验
 	err := c.ShouldBind(&cr)
 	if err != nil {
