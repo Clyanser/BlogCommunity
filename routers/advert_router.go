@@ -7,4 +7,5 @@ func (r RouterGroup) AdvertRouter() {
 	r.GET("adverts", advertApi.AdvertList)
 	r.POST("adverts", advertApi.AdvertCreat)
 	r.PUT("adverts/:id", advertApi.AdvertUpdate)
+	r.DELETE("adverts", advertApi.AdvertRemove)
 }

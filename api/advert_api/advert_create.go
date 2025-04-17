@@ -10,10 +10,10 @@ import (
 
 type AdvertReq struct {
 	gorm.Model `structs:"-"`
-	Title      string `json:"title" binding:"required" msg:"请输入标题" structs:"title"`         //显示的标题
-	Href       string `json:"href" binding:"required,url" msg:"非法的跳转链接" structs:"href"`   //跳转链接
+	Title      string `json:"title" binding:"required" msg:"请输入标题" structs:"title"`        //显示的标题
+	Href       string `json:"href" binding:"required,url" msg:"非法的跳转链接" structs:"href"`    //跳转链接
 	Images     string `json:"images" binding:"required,url" msg:"图片地址非法" structs:"images"` //图片
-	IsShow     bool   `json:"is_show" msg:"请选择标题是否展示" structs:"is_show"`                //是否展示
+	IsShow     bool   `json:"is_show" msg:"请选择标题是否展示" structs:"is_show"`                   //是否展示
 }
 
 func (AdvertApi) AdvertCreat(c *gin.Context) {
