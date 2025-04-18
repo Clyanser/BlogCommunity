@@ -9,4 +9,5 @@ func (r RouterGroup) MenuRouter() {
 	r.POST("menu", menuRouter.MenuCreate)
 	r.GET("menu", menuRouter.MenuList)
 	r.GET("menu_names", menuRouter.MenuNameList)
+	r.PUT("menu/:id", menuRouter.MenuUpdate)
 }
