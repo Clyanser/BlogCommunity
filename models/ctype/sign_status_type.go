@@ -7,7 +7,7 @@ type StatusType int
 const (
 	SignQQ     StatusType = 1 //qq
 	SignWechat            = 2 //微信
-	SignGitHub            = 3 //github
+	SignEmail             = 3 //github
 )
 
 func (s StatusType) MarshalJSON() ([]byte, error) {
@@ -21,7 +21,7 @@ func (s StatusType) String() string {
 		str = "qq"
 	case SignWechat:
 		str = "微信"
-	case SignGitHub:
+	case SignEmail:
 		str = "github"
 	default:
 		str = "其他"

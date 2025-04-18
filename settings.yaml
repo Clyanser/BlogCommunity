@@ -40,8 +40,8 @@ qq:
   redirect: xx
 qi_niu:
   enable: true
-  access_key: qwwHtwpSIZrya1TLEhFQcNpY25If70-9qwNQS45C
-  secret_key: X-HELtON3WMobFiPgZ6zv-lpc6guKexkxQMcU4qd
+  access_key: qwwHtwp
+  secret_key: X-HELtO
   bucket: amoytudou
   cdn: hn-bkt-clouddn-com-idvcz9d.www.qiniudns.com
   zone: z2
