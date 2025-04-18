@@ -14,8 +14,8 @@ type Banner struct {
 }
 
 type MenuResponse struct {
-	models.MenuModel
-	Banners []Banner
+	MenuModel models.MenuModel
+	Banners   []Banner
 }
 
 func (MenuAPI) MenuList(c *gin.Context) {
