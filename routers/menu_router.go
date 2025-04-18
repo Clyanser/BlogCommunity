@@ -10,4 +10,5 @@ func (r RouterGroup) MenuRouter() {
 	r.GET("menu", menuRouter.MenuList)
 	r.GET("menu_names", menuRouter.MenuNameList)
 	r.PUT("menu/:id", menuRouter.MenuUpdate)
+	r.DELETE("menu", menuRouter.MenuDelete)
 }
