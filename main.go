@@ -3,7 +3,6 @@ package main
 import (
 	"GoBlog/core"
 	_ "GoBlog/docs"
-	"GoBlog/flag"
 	"GoBlog/global"
 	"GoBlog/routers"
 )
@@ -21,11 +20,11 @@ func main() {
 	//	gorm的连接
 	global.DB = core.InitGorm()
 	//命令行参数绑定
-	option := flag.Parse()
-	if flag.IsWebStop(option) {
-		flag.SwitchOption(option)
-		return
-	}
+	//option := flag.Parse()
+	//if flag.IsWebStop(option) {
+	//	flag.SwitchOption(option)
+	//	return
+	//}
 	//初始化routers
 	r := routers.InitRouter()
 	global.Log.Info(global.Config.System.Addr())
