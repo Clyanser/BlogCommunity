@@ -9,7 +9,7 @@ type UserModel struct {
 	gorm.Model
 	NickName       string           `gorm:"size:36" json:"nickName"`
 	Username       string           `gorm:"size:36" json:"username"`
-	Password       string           `gorm:"size:128" json:"password"`
+	Password       string           `gorm:"size:128" json:"-"`
 	Avatar         string           `gorm:"size:256" json:"avatar"`
 	Email          string           `gorm:"size:128" json:"email"`
 	Phone          string           `gorm:"size:18" json:"phone"`

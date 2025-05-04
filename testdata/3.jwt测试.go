@@ -17,6 +17,6 @@ func main() {
 		Nickname: "1019",
 	})
 	fmt.Println(token, err)
-	claims, err := jwts.ParseToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwibmlja25hbWUiOiIxMDE5Iiwicm9sZSI6MSwidXNlcmlkIjoxLCJleHAiOjE3NDU0MDAwMjMuMjk0NTQ0LCJpc3MiOiJ4eCJ9.acGG6KJbNlz92M4bJc5PgwWrcSsJXcodN9F4f1tXPMo")
+	claims, err := jwts.ParseToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6IjEwMTkiLCJyb2xlIjoxLCJ1c2VyaWQiOjEsImV4cCI6MTc0NjUwMDE3Ny45NTA0NTEsImlzcyI6Inh4In0.4T501-3Wy4ajHBffDb5dtVa6OMXHT0F8ZhiQ9XN_34o")
 	fmt.Println(claims, err)
 }
