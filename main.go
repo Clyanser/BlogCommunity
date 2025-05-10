@@ -20,6 +20,8 @@ func main() {
 	global.Log = core.InitLogger()
 	//	gorm的连接
 	global.DB = core.InitGorm()
+	//redis
+	global.Redis = core.InitRedis()
 	//命令行参数绑定
 	option := flag.Parse()
 	if flag.IsWebStop(option) {
