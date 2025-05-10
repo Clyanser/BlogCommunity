@@ -13,6 +13,7 @@ func JwtAuth() gin.HandlerFunc {
 		if token == "" {
 			res.FailWithMsg("未携带token", c)
 			c.Abort()
+
 			return
 		}
 		claims, err := jwts.ParseToken(token)

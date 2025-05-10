@@ -10,5 +10,6 @@ func (r RouterGroup) UserRouter() {
 	r.GET("user", middleware.JwtAuth(), userApi.UserList)
 	r.POST("user", userApi.EmailLogin)
 	r.PUT("user_role", userApi.UserUpdateRole)
+	r.PUT("user_password", middleware.JwtAuth(), userApi.UserUpdatePassword)
 
 }
