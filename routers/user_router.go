@@ -7,9 +7,10 @@ import (
 
 func (r RouterGroup) UserRouter() {
 	userApi := api.ApiGroupApp.UserAPI
-	r.GET("user", middleware.JwtAuth(), userApi.UserList)
 	r.POST("user", userApi.EmailLogin)
-	r.PUT("user_role", userApi.UserUpdateRole)
+	r.GET("user", middleware.JwtAuth(), userApi.UserList)
+	r.PUT("user_role", middleware.JwtAdmin(), userApi.UserUpdateRole)
 	r.PUT("user_password", middleware.JwtAuth(), userApi.UserUpdatePassword)
-
+	r.POST("user_logout", middleware.JwtAuth(), userApi.Logout)
+	r.DELETE("user_delete", middleware.JwtAdmin(), userApi.UserRemove)
 }
