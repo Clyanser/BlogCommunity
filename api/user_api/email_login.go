@@ -25,7 +25,7 @@ func (UserApi) EmailLogin(c *gin.Context) {
 	}
 	//验证用户名是否存在
 	var userModel models.UserModel
-	err = global.DB.Take(&userModel, "user_name=? or email", cr.Username, cr.Username).Error
+	err = global.DB.Take(&userModel, "username=? or email= ?", cr.Username, cr.Username).Error
 	if err != nil {
 		global.Log.Warn("用户名不存在")
 		res.FailWithMsg("用户名或密码错误", c)
