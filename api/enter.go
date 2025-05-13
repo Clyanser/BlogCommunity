@@ -5,6 +5,7 @@ import (
 	"GoBlog/api/images_api"
 	"GoBlog/api/menu_api"
 	"GoBlog/api/settings_api"
+	"GoBlog/api/tag_api"
 	"GoBlog/api/user_api"
 )
 
@@ -14,6 +15,7 @@ type ApiGroup struct {
 	AdvertAPI   advert_api.AdvertApi
 	MenuAPI     menu_api.MenuAPI
 	UserAPI     user_api.UserApi
+	TagAPI      tag_api.TagApi
 }
 
 // 实例化对象
