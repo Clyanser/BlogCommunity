@@ -17,6 +17,7 @@ func (TagApi) TagList(c *gin.Context) {
 	list, count, _ := common.ComList(models.TagModel{}, common.Option{
 		PageInfo: cr,
 	})
+	//需要展示这个标签下文章的数量
 	res.OkWithList(list, count, c)
 
 }
