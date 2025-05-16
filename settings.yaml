@@ -25,7 +25,7 @@ site_Info:
   title: Jaory的个人博客
   qq_image: ""
   version: "1.2"
-  email: 2585925873@qq.com
+  email: 2585@qq.com
   wechat_image: ""
   name: ""
   job: 后端开发
@@ -50,7 +50,7 @@ email:
   host: "smtp.qq.com"
   port: 465
   user: "2585925873@qq.com"
-  password: "bzfjqyv"
+  password: "bzfjqyvo"
   defaultFromEmail: "jaory"
   use_ssl: true
   use_tls: false
