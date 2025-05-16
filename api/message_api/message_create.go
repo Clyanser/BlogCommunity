@@ -15,6 +15,8 @@ type MessageRequest struct {
 
 // MessageCreate 发布消息
 func (MessageAPI) MessageCreate(c *gin.Context) {
+	//当前用户发布消息
+	//SendUserID 就是当前登录人的id
 	var cr MessageRequest
 	err := c.ShouldBindJSON(&cr)
 	if err != nil {

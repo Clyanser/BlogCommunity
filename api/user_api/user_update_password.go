@@ -34,7 +34,7 @@ func (UserApi) UserUpdatePassword(c *gin.Context) {
 		res.FailWithMsg("密码错误", c)
 		return
 	}
-	hashPassword := pwd.HashPwd(cr.NewPassword)
+	hashPassword, _ := pwd.HashPwd(cr.NewPassword)
 	err = global.DB.Model(&user).Update("password", hashPassword).Error
 	if err != nil {
 		global.Log.Error(err)

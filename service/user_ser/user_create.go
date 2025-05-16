@@ -10,13 +10,13 @@ import (
 func (UserService) UserCreate(userName string, nickName, password string, role ctype.Role, email string, ip string) error {
 	//	判断用户名是否存在
 	var usermodel models.UserModel
-	err := global.DB.Take(&usermodel, "user_name = ?", userName).Error
+	err := global.DB.Take(&usermodel, "username = ?", userName).Error
 	if err == nil {
 		global.Log.Error("用户已存在,请重新输入！")
 		return err
 	}
 	//	对密码进行hash
-	hash := pwd.HashPwd(password)
+	hash, _ := pwd.HashPwd(password)
 
 	//	头像问题
 	//	1.默认头像2.随机选择头像

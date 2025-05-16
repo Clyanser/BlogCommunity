@@ -23,6 +23,7 @@ func Makemigretion() {
 		&models.MenuBannerModel{},
 		&models.LoginDataModel{},
 		&models.UserCollectModel{},
+		&models.LogModel{},
 	)
 	if err != nil {
 		global.Log.Error("[error]:生成数据库表结构失败")

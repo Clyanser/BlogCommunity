@@ -71,7 +71,7 @@ func (UserApi) UserBindEmail(c *gin.Context) {
 		return
 	}
 	//第一次的邮箱与第二次的邮箱也需要做一致性校验
-	hashPassword := pwd.HashPwd(cr.Password)
+	hashPassword, _ := pwd.HashPwd(cr.Password)
 	err = global.DB.Model(&users).Updates(map[string]any{
 		"email":    cr.Email,
 		"password": hashPassword,

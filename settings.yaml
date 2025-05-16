@@ -50,7 +50,7 @@ email:
   host: "smtp.qq.com"
   port: 465
   user: "2585925873@qq.com"
-  password: "bzfjqyvofpgoeadc"
+  password: "bzfjqyv"
   defaultFromEmail: "jaory"
   use_ssl: true
   use_tls: false

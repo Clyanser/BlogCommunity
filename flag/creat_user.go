@@ -31,6 +31,8 @@ func CreateUser(permissions string) {
 	if password != confirmPassword {
 		global.Log.Error("两次输入的密码,不一致，请重新输入")
 		return
+	} else {
+		global.Log.Infof("输入的密码: [%s]", password)
 	}
 	//默认为普通用户
 	role := ctype.PermissionUser

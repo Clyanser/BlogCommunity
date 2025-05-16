@@ -3,7 +3,9 @@ package user_api
 import (
 	"GoBlog/global"
 	"GoBlog/models"
+	"GoBlog/models/ctype"
 	"GoBlog/models/res"
+	"GoBlog/service/log_service"
 	"GoBlog/utils/jwts"
 	"GoBlog/utils/pwd"
 	"github.com/gin-gonic/gin"
@@ -27,6 +29,7 @@ func (UserApi) EmailLogin(c *gin.Context) {
 	var userModel models.UserModel
 	err = global.DB.Take(&userModel, "username=? or email= ?", cr.Username, cr.Username).Error
 	if err != nil {
+		log_service.NewLoginFail(c, ctype.LoginLogType, "用户名不存在", cr.Username, cr.Password)
 		global.Log.Warn("用户名不存在")
 		res.FailWithMsg("用户名或密码错误", c)
 		return
@@ -34,6 +37,7 @@ func (UserApi) EmailLogin(c *gin.Context) {
 	//	校验密码
 	isCheck := pwd.VerifyPassword(userModel.Password, cr.Password)
 	if !isCheck {
+		log_service.NewLoginFail(c, ctype.LoginLogType, "用户名密码错误", cr.Username, cr.Password)
 		global.Log.Warn("用户名密码错误")
 		res.FailWithMsg("用户名或密码错误", c)
 		return
@@ -49,5 +53,6 @@ func (UserApi) EmailLogin(c *gin.Context) {
 		res.FailWithMsg("token生成失败", c)
 		return
 	}
+	log_service.NewLoginSuccess(c, ctype.LoginLogType, userModel)
 	res.OkWithData(token, c)
 }
