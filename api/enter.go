@@ -2,6 +2,7 @@ package api
 
 import (
 	"GoBlog/api/advert_api"
+	"GoBlog/api/article_api"
 	"GoBlog/api/images_api"
 	"GoBlog/api/menu_api"
 	"GoBlog/api/message_api"
@@ -18,6 +19,7 @@ type ApiGroup struct {
 	UserAPI     user_api.UserApi
 	TagAPI      tag_api.TagApi
 	MessageAPI  message_api.MessageAPI
+	ArticleAPI  article_api.ArticleApi
 }
 
 // 实例化对象
