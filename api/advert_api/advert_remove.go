@@ -33,5 +33,6 @@ func (AdvertApi) AdvertRemove(c *gin.Context) {
 	}
 	//删除逻辑
 	global.DB.Delete(&AdvertList)
+
 	res.OkWithMsg(fmt.Sprintf("共删除 %d 个广告", count), c)
 }
