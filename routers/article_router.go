@@ -13,4 +13,5 @@ func (r RouterGroup) ArticleRouter() {
 	r.PUT("/articles/:id", middleware.JwtAuth(), articleApi.ArticleUpdate)
 	r.POST("/articles_digg/:id", middleware.JwtAuth(), articleApi.ArticleUpdateDiggCount)
 	r.DELETE("/articles/:id", middleware.JwtAuth(), articleApi.DeleteArticle)
+
 }

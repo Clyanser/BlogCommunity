@@ -3,6 +3,7 @@ package api
 import (
 	"GoBlog/api/advert_api"
 	"GoBlog/api/article_api"
+	"GoBlog/api/article_collect"
 	"GoBlog/api/images_api"
 	"GoBlog/api/menu_api"
 	"GoBlog/api/message_api"
@@ -12,14 +13,15 @@ import (
 )
 
 type ApiGroup struct {
-	SettingsAPI settings_api.SettingsAPI
-	ImagesAPI   images_api.ImagesAPI
-	AdvertAPI   advert_api.AdvertApi
-	MenuAPI     menu_api.MenuAPI
-	UserAPI     user_api.UserApi
-	TagAPI      tag_api.TagApi
-	MessageAPI  message_api.MessageAPI
-	ArticleAPI  article_api.ArticleApi
+	SettingsAPI       settings_api.SettingsAPI
+	ImagesAPI         images_api.ImagesAPI
+	AdvertAPI         advert_api.AdvertApi
+	MenuAPI           menu_api.MenuAPI
+	UserAPI           user_api.UserApi
+	TagAPI            tag_api.TagApi
+	MessageAPI        message_api.MessageAPI
+	ArticleAPI        article_api.ArticleApi
+	ArticleCollectApi article_collect.ArticleCollectApi
 }
 
 // 实例化对象
