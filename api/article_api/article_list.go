@@ -9,6 +9,7 @@ import (
 	"strconv"
 )
 
+// ArticleListAdmin 获取全站的所有文章
 func (ArticleApi) ArticleListAdmin(c *gin.Context) {
 	_cliams, _ := c.Get("claims")
 	claims := _cliams.(*jwts.CustomClaims)
@@ -43,6 +44,42 @@ func (ArticleApi) ArticleListAdmin(c *gin.Context) {
 		articleList = append(articleList, articleData)
 	}
 
+	res.OkWithData(articleList, c)
+}
+
+// ArticleListUser 获取用户发表的所有文章
+func (ArticleApi) ArticleListUser(c *gin.Context) {
+	_cliams, _ := c.Get("claims")
+	claims := _cliams.(*jwts.CustomClaims)
+	//判断用户合法性
+	var users models.UserModel
+	err := global.DB.Take(&users, claims.UserID).Error
+	if err != nil {
+		res.FailWithMsg("用户不存在", c)
+		return
+	}
+	//查询关于用户的文章列表
+	var articles []models.ArticleModel
+	result := global.DB.Where("user_id = ?", claims.UserID).Find(&articles)
+	if result.Error != nil {
+		res.FailWithMsg("获取文章列表失败", c)
+		return
+	}
+	// 提取所需字段
+	var articleList []map[string]interface{}
+	for _, article := range articles {
+		articleData := map[string]interface{}{
+			"id":             article.ID,
+			"title":          article.Title,
+			"abstract":       article.Abstract,
+			"user_id":        article.UserID,
+			"look_count":     article.LookCount,
+			"comment_count":  article.CommentCount,
+			"digg_count":     article.DiggCount,
+			"collects_count": article.CollectsCount,
+		}
+		articleList = append(articleList, articleData)
+	}
 	res.OkWithData(articleList, c)
 }
 
